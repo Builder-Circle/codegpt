@@ -1,0 +1,14 @@
+.inputfile::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: #319795;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+.inputfile::file-selector-button:hover {
+    background: #2a7d79;
+}
