@@ -6,7 +6,17 @@ import { ChakraProvider } from '@chakra-ui/react'
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <head />
+
+      <head>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta name='description' content='CodeGPT' />
+        <meta name='author' content='CodeGPT' />
+        <meta name='keywords' content='CodeGPT' />
+        <meta name='theme-color' content='#000000' />
+        <link rel='icon' href='/favicon.ico' />
+        <title>CodeGPT</title>
+      </head>
       <body>
         <CacheProvider>
           <ChakraProvider>

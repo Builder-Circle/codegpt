@@ -13,6 +13,7 @@ import { Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
 import Style from "@/app/translate/translate.module.css";
 import { Input } from "@chakra-ui/react";
 import CopyButton from "@/component/CopyButton";
+import axios from "axios";
 
 const baselanguage = [ "C", "C++", "C#", "Java", "Python","Javascript","Typescript","Go"];
 
@@ -56,8 +57,14 @@ export default function Page() {
         console.log("Test")
     }
     function convert() {
-
-        console.log("convert");
+        axios.post("/api/convert", {
+            content: strfile,
+            language: language2,
+        })
+        .then((res) => {
+            setConvertCode(res.data);
+        })
+        .catch((err) => console.error(err));
     }
 
     return (
@@ -143,11 +150,7 @@ export default function Page() {
                     </Box>
 
                     <Textarea border={"0"} minW={"400px"} minH={"400px"} mb={"1rem"} placeholder="Code ..." 
-                    value={convertCode} onChange={(e)=>{
-                        setConvertCode(e.target.value)
-                        if(e.target.value==="")
-                            setConvertCode("");
-                    }} >
+                    value={convertCode}  >
                     </Textarea>
                     <CopyButton copyText={convertCode} />
 
