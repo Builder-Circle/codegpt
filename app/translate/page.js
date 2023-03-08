@@ -12,11 +12,11 @@ import { useState,useRef } from 'react';
 import { Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
 import Style from "@/app/translate/translate.module.css";
 import { Input } from "@chakra-ui/react";
-import CopyButton from "@/component/copyButton";
+import CopyButton from "@/component/CopyButton";
 
 const baselanguage = [ "C", "C++", "C#", "Java", "Python","Javascript","Typescript","Go"];
 
-export default function translate() {
+export default function Page() {
     const [file, setfile] = useState(null);
     const [strfile,setStrfile] = useState("");
     const [language, setLanguage] = useState("detect language");
