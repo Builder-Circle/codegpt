@@ -10,13 +10,13 @@ import {
 import { Textarea } from "@chakra-ui/react";
 import { useState,useRef } from 'react';
 import { Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
-import SelectLanguage from "@/component/selectLanguage";
 import Style from "@/app/translate/translate.module.css";
 import { Input } from "@chakra-ui/react";
+import CopyButton from "@/component/CopyButton";
 
 const baselanguage = [ "C", "C++", "C#", "Java", "Python","Javascript","Typescript","Go"];
 
-export default function translate() {
+export default function Page() {
     const [file, setfile] = useState(null);
     const [strfile,setStrfile] = useState("");
     const [language, setLanguage] = useState("detect language");
@@ -24,7 +24,9 @@ export default function translate() {
     const converButton = useRef(null);
     const [open, setOpen] = useState(false);
     const [openSuggestions, setOpenSuggestions] = useState(false);
+    const [convertCode, setConvertCode] = useState("");
     function handleFileChange(e) {
+
         const tmpfile = e.target.files[0];
         if(!tmpfile) {
             setStrfile("Take some code here");
@@ -110,7 +112,7 @@ export default function translate() {
                     justifyContent={"space-evenly"}
                     alignItems={"center"}
                 >
-                    <Box width={"211px"} >
+                    <Box width={"211px"} mb={"1rem"} >
                         <Box mb={"0.5rem"}>
                             <form action="#clickconvert" onSubmit={(e)=>{
                                 e.preventDefault();
@@ -140,14 +142,20 @@ export default function translate() {
                         </Box>
                     </Box>
 
-                    <Textarea border={"0"} minW={"400px"} minH={"400px"} mb={"1rem"} placeholder="Code ..." isReadOnly  >
-                        
+                    <Textarea border={"0"} minW={"400px"} minH={"400px"} mb={"1rem"} placeholder="Code ..." 
+                    value={convertCode} onChange={(e)=>{
+                        setConvertCode(e.target.value)
+                        if(e.target.value==="")
+                            setConvertCode("");
+                    }} >
                     </Textarea>
-                    <input
+                    <CopyButton copyText={convertCode} />
+
+                    {/* <input
                         type="file"
                         className={Style.inputfile}
                         style={{ visibility: "hidden" }}
-                    />
+                    /> */}
                 </Box>
             </Flex>
         </>

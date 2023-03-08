@@ -1,5 +1,5 @@
 'use client'
-import Navbar from '@/component/navbar'
+import Navbar from '@/component/Navbar'
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
 
