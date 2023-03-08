@@ -1,12 +1,5 @@
 "use client";
-import { Image } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import {
-    Editable,
-    EditableInput,
-    EditableTextarea,
-    EditablePreview,
-} from "@chakra-ui/react";
+
 import { Textarea } from "@chakra-ui/react";
 import { useState,useRef } from 'react';
 import { Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
@@ -14,7 +7,7 @@ import Style from "@/app/translate/translate.module.css";
 import { Input } from "@chakra-ui/react";
 import CopyButton from "@/component/CopyButton";
 import axios from "axios";
-
+import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
 const baselanguage = [ "C", "C++", "C#", "Java", "Python","Javascript","Typescript","Go"];
 
 export default function Page() {
@@ -26,6 +19,7 @@ export default function Page() {
     const [open, setOpen] = useState(false);
     const [openSuggestions, setOpenSuggestions] = useState(false);
     const [convertCode, setConvertCode] = useState("");
+    const [loader, setLoader] = useState(false);
     function handleFileChange(e) {
 
         const tmpfile = e.target.files[0];
@@ -54,15 +48,18 @@ export default function Page() {
     function clickconvert() {
         converButton.current.click();
         setOpenSuggestions(false);
-        console.log("Test")
     }
     function convert() {
+        setLoader(true);
+        if(language2==="")
+            return;
         axios.post("/api/convert", {
             content: strfile,
             language: language2,
         })
         .then((res) => {
-            setConvertCode(res.data);
+            setLoader(false);
+            setConvertCode(res.data.message);
         })
         .catch((err) => console.error(err));
     }
@@ -89,11 +86,15 @@ export default function Page() {
                         <Input color={"gray.400"} value={language} isReadOnly textAlign={"center"}  />
                     </Box>
                     <Textarea border={"0"} minW={"400px"} minH={"400px"} mb={"1rem"} value={strfile} placeholder="Take some code here ..." 
-                    onChange={(e)=>(setStrfile(e.target.value))} >
+                    onChange={(e)=>{
+                        setStrfile(e.target.value)
+                        setLoader(false);
+                    }} >
                         
                     </Textarea>
                     <input
                         type="file"
+                        
                         className={Style.inputfile}
                         onChange={(e) => {
                             handleFileChange(e);
@@ -102,7 +103,10 @@ export default function Page() {
                 </Box>
                 <Box>
                     <Flex>
-                        <Button colorScheme="teal" size="lg" ref={converButton} onClick={convert}>
+                        <Button colorScheme="teal" size="lg" ref={converButton} onClick={()=>{
+                            convert()
+                            setOpenSuggestions(false)
+                        }}>
                             Convert
                             
                         </Button>
@@ -135,7 +139,7 @@ export default function Page() {
                             </form>
                         </Box >
                         <Box position={"relative"}>
-                            {openSuggestions&&<Box display={"flex"} flexDirection={"column"} border={"1px"} borderColor={"gray.400"} color={"gray.400"} position={"absolute"} zIndex={"1"} width={"100%"} >
+                            {openSuggestions &&<Box display={"flex"} flexDirection={"column"} border={"1px"} borderColor={"gray.400"} color={"gray.400"} position={"absolute"} zIndex={"1"} width={"100%"} >
                                 {language2&& open &&baselanguage.filter((item)=>(item.toLowerCase().includes(language2.toLowerCase()))).map((item)=>(
                                     <Box key={item} onClick={()=>{
                                         setLanguage2(item)
@@ -152,7 +156,10 @@ export default function Page() {
                     <Textarea border={"0"} minW={"400px"} minH={"400px"} mb={"1rem"} placeholder="Code ..." 
                     value={convertCode}  >
                     </Textarea>
-                    <CopyButton copyText={convertCode} />
+                    <Box display={"flex"} justifyContent={"center"} width={"100%"} gap={"20px"} >
+                        { loader && <CircularProgress isIndeterminate color='green.300' />}
+                        <CopyButton copyText={convertCode} />
+                    </Box>
 
                     {/* <input
                         type="file"
