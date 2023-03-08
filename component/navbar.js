@@ -7,11 +7,10 @@ import { useState,useEffect } from "react";
 
 export default function Navbar() {
     const pathname = usePathname();
-    
-    
+
     return (
         <>
-            <Container p={{base:"0px"}} maxW={{ base: "100%" } } >
+            <Container p={{base:"0px"}} maxW={{ base: "100%" } }   position={"fixed"} top={"0px"} zIndex={"2"} bg={"white"}>
                 <Flex bg="" p="0"  boxShadow="base">
                     <Box p="4" bg="" >
                         <Link href={"/"} >

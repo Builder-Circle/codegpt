@@ -66,10 +66,12 @@ export default function Page() {
 
     return (
         <>
-            <Flex
+            <Flex mt={{ base: "4rem"}} rowGap={{base:"1rem",md:"0rem"}} 
+                flexDirection={{base:"row"}}
                 height={"90vh"}
                 alignItems={"center"}
                 justifyContent={"space-evenly"}
+                flexWrap={"wrap"}
             >
                 <Box
                     p={"1rem"}
@@ -81,6 +83,7 @@ export default function Page() {
                     flexDirection={"column"}
                     justifyContent={"space-evenly"}
                     alignItems={"center"}
+                    
                 >
                     <Box mb={"1rem"}>
                         <Input color={"gray.400"} value={language} isReadOnly textAlign={"center"}  />
