@@ -51,6 +51,7 @@ export default function translate() {
     function clickconvert() {
         converButton.current.click();
         setOpenSuggestions(false);
+        console.log("Test")
     }
     function convert() {
 
