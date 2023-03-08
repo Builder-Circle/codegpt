@@ -111,7 +111,7 @@ export default function translate() {
                     justifyContent={"space-evenly"}
                     alignItems={"center"}
                 >
-                    <Box width={"211px"} >
+                    <Box width={"211px"} mb={"1rem"} >
                         <Box mb={"0.5rem"}>
                             <form action="#clickconvert" onSubmit={(e)=>{
                                 e.preventDefault();
@@ -150,11 +150,11 @@ export default function translate() {
                     </Textarea>
                     <CopyButton copyText={convertCode} />
 
-                    <input
+                    {/* <input
                         type="file"
                         className={Style.inputfile}
                         style={{ visibility: "hidden" }}
-                    />
+                    /> */}
                 </Box>
             </Flex>
         </>

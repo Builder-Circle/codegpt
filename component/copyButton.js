@@ -5,7 +5,7 @@ export default function copyButton({ copyText = "" }) {
     const { onCopy, value, setValue, hasCopied } = useClipboard(copyText);
     return (
         <>
-            <Button colorScheme="teal" size="xs" onClick={()=>{
+            <Button colorScheme="teal" size="lg" onClick={()=>{
                 setValue(copyText);
                 onCopy();
             }} >
