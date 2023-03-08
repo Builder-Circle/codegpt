@@ -10,9 +10,9 @@ import {
 import { Textarea } from "@chakra-ui/react";
 import { useState,useRef } from 'react';
 import { Box, Button, Flex, Spacer, Text } from "@chakra-ui/react";
-import SelectLanguage from "@/component/selectLanguage";
 import Style from "@/app/translate/translate.module.css";
 import { Input } from "@chakra-ui/react";
+import CopyButton from "@/component/copyButton";
 
 const baselanguage = [ "C", "C++", "C#", "Java", "Python","Javascript","Typescript","Go"];
 
@@ -24,7 +24,9 @@ export default function translate() {
     const converButton = useRef(null);
     const [open, setOpen] = useState(false);
     const [openSuggestions, setOpenSuggestions] = useState(false);
+    const [convertCode, setConvertCode] = useState("");
     function handleFileChange(e) {
+
         const tmpfile = e.target.files[0];
         if(!tmpfile) {
             setStrfile("Take some code here");
@@ -139,9 +141,15 @@ export default function translate() {
                         </Box>
                     </Box>
 
-                    <Textarea border={"0"} minW={"400px"} minH={"400px"} mb={"1rem"} placeholder="Code ..." isReadOnly  >
-                        
+                    <Textarea border={"0"} minW={"400px"} minH={"400px"} mb={"1rem"} placeholder="Code ..." 
+                    value={convertCode} onChange={(e)=>{
+                        setConvertCode(e.target.value)
+                        if(e.target.value==="")
+                            setConvertCode("");
+                    }} >
                     </Textarea>
+                    <CopyButton copyText={convertCode} />
+
                     <input
                         type="file"
                         className={Style.inputfile}

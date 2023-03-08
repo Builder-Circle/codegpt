@@ -12,9 +12,9 @@ export default function navbar() {
                     <Box p="4" >
                         <Link href={"/translate"} >Translate</Link>
                     </Box>
-                    <Box p="4">
+                    {/* <Box p="4">
                         <Link href={"/debug"} >debug</Link>
-                    </Box>
+                    </Box> */}
 
                     <Spacer />
                     
