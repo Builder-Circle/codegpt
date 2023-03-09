@@ -49,7 +49,7 @@ export default function SqlQuery() {
                 alltable: alltable,
             })
             .then((res)=>{
-                setSql(res.data.sql);
+                setSql(res.data.message);
                 setLoader(false);
             })
             .catch((err)=>{
@@ -83,7 +83,7 @@ export default function SqlQuery() {
                     </FormLabel>
                     
                         <AutoResizeTextArea 
-                            placeholder={"Example: name,price,quantity"
+                            placeholder={" what is you question?"
                         }
                         id={"dataRequire"}
                         minH={"1rem"}
