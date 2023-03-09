@@ -24,7 +24,7 @@ export default function CreateTableData({clickcreate}) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [tableName, setTableName] = useState("");
     const [primarykey, setPrimarykey] = useState("");
-    const [foreingkey, setForeingkey] = useState("");
+    const [foreignkey, setForeignkey] = useState("");
     const [attributes, setAttributes] = useState("");
     const [ablecreate, setAblecreate] = React.useState(false);
     const [alltable, setAlltable] = useState([]);
@@ -36,12 +36,12 @@ export default function CreateTableData({clickcreate}) {
     }, []);
     useEffect(() => {
         checkAblecreate();
-    }, [tableName, primarykey, foreingkey, attributes]);
+    }, [tableName, primarykey, foreignkey, attributes]);
     function createNewtable() {
         const newtable = {
             tableName: tableName,
             primarykey: primarykey,
-            foreingkey: foreingkey,
+            foreignkey: foreignkey,
             attributes: attributes,
         };
         const newalltable = [...alltable, newtable];
@@ -55,7 +55,7 @@ export default function CreateTableData({clickcreate}) {
         if (
             tableName !== "" &&
             primarykey!== "" &&
-            foreingkey !== "" &&
+            foreignkey !== "" &&
             attributes !== ""
             
         ) {
@@ -115,20 +115,20 @@ export default function CreateTableData({clickcreate}) {
                                 />
                             </Box>
                             <Box>
-                                <FormLabel htmlFor="foreingkey">
-                                    Foreing key
+                                <FormLabel htmlFor="foreignkey">
+                                    Foreign key
                                 </FormLabel>
                                 <AutoResizeTextArea 
                                 placeholder={"Example: product_id,order_id"
                                 }
-                                id={"foreingkey"}
+                                id={"foreignkey"}
                                 minH={"1rem"}
                                 overflow={"hidden"}
                                 resize={"none"}
                                 onChange={(e)=> {
-                                    setForeingkey(e.target.value);
+                                    setForeignkey(e.target.value);
                                 }}
-                                value={foreingkey}
+                                value={foreignkey}
                                 
                                 />
                             </Box>
@@ -139,7 +139,7 @@ export default function CreateTableData({clickcreate}) {
                                 <AutoResizeTextArea 
                                 placeholder={"Example: name,price,quantity"
                                 }
-                                id={"foreingkey"} 
+                                id={"foreignkey"} 
                                 minH={"15rem"}
                                 overflow={"hidden"}
                                 resize={"none"}
