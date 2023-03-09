@@ -13,7 +13,7 @@ export default function AutoResizeTextArea(props) {
     return (<>
         <Textarea 
         ref={ref} 
-        s
+        
         {...props}/>
     </>);
 }

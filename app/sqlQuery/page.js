@@ -10,6 +10,7 @@ import { Input } from "@chakra-ui/react";
 import AutoResizeTextArea from "@/component/AutoResizeTextArea";
 import Datatable from "@/component/Datatable";
 import { CircularProgress } from "@chakra-ui/react";
+
 import {
     FormControl,
     FormLabel,
@@ -26,6 +27,7 @@ export default function SqlQuery() {
     const [dataRequire, setDataRequire] = useState("");
     const [sql, setSql] = useState("");
     const [loader, setLoader] = useState(false);
+    const [editTricker, setEditTricker] = useState(false);
     useEffect(() => {
         if(localStorage.getItem("alltable") === null){
             localStorage.setItem("alltable",JSON.stringify([]));
@@ -40,6 +42,12 @@ export default function SqlQuery() {
         }
         setAlltable(JSON.parse(localStorage.getItem("alltable")));
     }, [createtricker]);
+    useEffect(() => {
+        if(localStorage.getItem("alltable") === null){
+            localStorage.setItem("alltable",JSON.stringify([]));
+        }
+        setAlltable(JSON.parse(localStorage.getItem("alltable")));
+    }, [editTricker]);
 
     
     function clicksubmit(){
@@ -73,7 +81,9 @@ export default function SqlQuery() {
                     justifyContent={"center"}
                     mb={"2rem"}
                 >
-                    <Sqlquery sql={sql} createtable={()=>{setCreatetricker(!createtricker)}} />
+                    <Sqlquery sql={sql} createtable={()=>{setCreatetricker(!createtricker)} }
+                    clear={()=>{setDataRequire("");setSql("");}}
+                     />
                 </Box>
                 <FormControl width={"60%"}  >
                     <FormLabel mb={"1rem"} htmlFor="dataRequire" >
@@ -107,7 +117,8 @@ export default function SqlQuery() {
                 <Box width={"60%"} display={"flex"} flexDirection={"column"} gap={"1rem"} >
                     {
                         alltable.map((table,index)=>{
-                            return <Datatable key={index} tableName={table.tableName} del={(tablename)=>{deleteTable(tablename)}} />
+                            return <Datatable key={index} tableName={table.tableName} 
+                            del={(tablename)=>{deleteTable(tablename)}} trickEdit={()=>{setEditTricker(!editTricker)}} />
                         }
                         )
                     }
