@@ -28,6 +28,7 @@ export default function CreateTableData({clickcreate}) {
     const [attributes, setAttributes] = useState("");
     const [ablecreate, setAblecreate] = React.useState(false);
     const [alltable, setAlltable] = useState([]);
+    
     useEffect(() => {
         if(localStorage.getItem("alltable") === null){
             localStorage.setItem("alltable",JSON.stringify([]));
@@ -36,7 +37,19 @@ export default function CreateTableData({clickcreate}) {
     }, []);
     useEffect(() => {
         checkAblecreate();
+
     }, [tableName, primarykey, foreignkey, attributes]);
+
+
+    useEffect(() => {
+        setTableName("");
+        setPrimarykey("");
+        setForeingkey("");
+        setAttributes("");
+
+    }
+    , [isOpen]);
+
     function createNewtable() {
         const newtable = {
             tableName: tableName,
@@ -48,6 +61,8 @@ export default function CreateTableData({clickcreate}) {
         localStorage.setItem("alltable", JSON.stringify(newalltable));
         setAlltable(newalltable);
         clickcreate();
+        
+
         onClose();
     }
 

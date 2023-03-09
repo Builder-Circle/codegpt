@@ -9,6 +9,7 @@ import Sqlquery from "@/component/Sqlquery";
 import { Input } from "@chakra-ui/react";
 import AutoResizeTextArea from "@/component/AutoResizeTextArea";
 import Datatable from "@/component/Datatable";
+import { CircularProgress } from "@chakra-ui/react";
 import {
     FormControl,
     FormLabel,
@@ -24,6 +25,7 @@ export default function SqlQuery() {
     const [createtricker,setCreatetricker] = useState(false);
     const [dataRequire, setDataRequire] = useState("");
     const [sql, setSql] = useState("");
+    const [loader, setLoader] = useState(false);
     useEffect(() => {
         if(localStorage.getItem("alltable") === null){
             localStorage.setItem("alltable",JSON.stringify([]));
@@ -41,12 +43,14 @@ export default function SqlQuery() {
 
     
     function clicksubmit(){
+        setLoader(true);
        axios.post("/api/sqlquery",{
               dataRequire: dataRequire,
                 alltable: alltable,
             })
             .then((res)=>{
                 setSql(res.data.sql);
+                setLoader(false);
             })
             .catch((err)=>{
                 console.log(err);
@@ -93,7 +97,8 @@ export default function SqlQuery() {
                         }
                         />
         
-                    <Box my={"1rem"}  display="flex" justifyContent={"center"}>
+                    <Box my={"1rem"}  display="flex" justifyContent={"center"} gap={"1rem"}>
+                        { loader && <CircularProgress isIndeterminate color='green.300' fontSize={"1rem"} />}
                         <Button ref={submit_q} colorScheme="teal" onClick={clicksubmit}>
                             Submit
                         </Button>
