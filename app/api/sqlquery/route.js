@@ -11,7 +11,6 @@ export async function POST(request) {
             ],
             temperature: 0,
         });
-        console.log(chat.data.choices[0].message.content)
         return new Response(JSON.stringify({ message: chat.data.choices[0].message.content }));
     } catch (error) {
         let code
