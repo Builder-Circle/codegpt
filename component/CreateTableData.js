@@ -44,7 +44,7 @@ export default function CreateTableData({clickcreate}) {
     useEffect(() => {
         setTableName("");
         setPrimarykey("");
-        setForeingkey("");
+        setForeignkey("");
         setAttributes("");
 
     }
