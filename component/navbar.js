@@ -27,7 +27,13 @@ export default function Navbar() {
                     {/* <Box p="4">
                         <Link href={"/debug"} >debug</Link>
                     </Box> */}
-
+                    <Box p="4">
+                        <Link href={"/sqlQuery"} >
+                            <Text _hover={{color:"#2c7a7b"}} color={pathname=='/sqlQuery' ? 'teal':'black'}>
+                                SQL Query
+                            </Text>
+                        </Link>
+                    </Box>
                     <Spacer />
                     
                 </Flex>

@@ -10,7 +10,7 @@ import axios from "axios";
 import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
 const baselanguage = [ "C", "C++", "C#", "Java", "Python","Javascript","Typescript","Go"];
 
-export default function Page() {
+export default function Translate() {
     const [file, setfile] = useState(null);
     const [strfile,setStrfile] = useState("");
     const [language, setLanguage] = useState("detect language");
