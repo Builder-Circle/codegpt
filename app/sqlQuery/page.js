@@ -65,11 +65,14 @@ export default function SqlQuery() {
             });
 
     }
-    function deleteTable(tableName){
-        let newalltable = [...alltable];
-        newalltable = newalltable.filter((table)=>{return table.tableName !== tableName});
+    function deleteTable(id){
+        let newalltable = JSON.parse(localStorage.getItem("alltable"));
+        newalltable = newalltable.filter((table,index)=>{
+            return index !== id;
+        }
+        );
         localStorage.setItem("alltable",JSON.stringify(newalltable));
-        setAlltable(newalltable);
+        setAlltable(newalltable);    
     }
 
     return (
@@ -118,8 +121,8 @@ export default function SqlQuery() {
                     {
                         alltable.map((table,index)=>{
                             
-                            return <Datatable key={index} tableName={table.tableName} pk={table.primarykey} fk={table.foreignkey} attributes={table.attributes}
-                            del={(tablename)=>{deleteTable(tablename)}} trickEdit={()=>{setEditTricker(!editTricker)}} />
+                            return <Datatable key={index} tableName={table.tableName} pk={table.primarykey} fk={table.foreignkey} attributes={table.attributes} id={index}
+                            del={(id)=>{deleteTable(id)}} trickEdit={()=>{setEditTricker(!editTricker)}} />
                         }
                         )
                     }

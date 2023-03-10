@@ -18,98 +18,60 @@ import { Button } from "@chakra-ui/react";
 import React from "react";
 import { Input } from "@chakra-ui/react";
 
-export default function Datatable({
-  tableName = "Customer",
-  pk = "customer_id",
-  fk = "order_id",
-  attributes = "category,price,quantity",
-  del,
-  trickEdit,
-}) {
-  const [isEdit, setIsEdit] = React.useState(false);
-  const [newTableName, setNewTableName] = React.useState(tableName);
-  const [newPk, setNewPk] = React.useState(pk);
-  const [newFk, setNewFk] = React.useState(fk);
-  const [newAttributes, setNewAttributes] = React.useState(attributes);
+export default function Datatable({tableName="Customer",pk="customer_id",fk="order_id",attributes="category,price,quantity",del,trickEdit,id}) {
+    const [isEdit,setIsEdit] = React.useState(false);
+    const [newTableName,setNewTableName] = React.useState(tableName);
+    const [newPk,setNewPk] = React.useState(pk);
+    const [newFk,setNewFk] = React.useState(fk);
+    const [newAttributes,setNewAttributes] = React.useState(attributes);
 
-  function saveEdit() {
-    setIsEdit(false);
-    const newtable = {
-      tableName: newTableName,
-      primarykey: newPk,
-      foreignkey: newFk,
-      attributes: newAttributes,
-    };
-    let newalltable = JSON.parse(localStorage.getItem("alltable"));
-    newalltable = newalltable.map((table) => {
-      if (table.tableName === tableName) {
-        return newtable;
-      }
-      return table;
-    });
-    localStorage.setItem("alltable", JSON.stringify(newalltable));
-    trickEdit();
-  }
-  return (
-    <>
-      <Card width={"100%"}>
-        <CardHeader display={"flex"} alignItems={"center"}>
-          <Input
-            type="text"
-            border={"none"}
-            size={"md"}
-            fontWeight={"bold"}
-            fontSize={"xl"}
-            isReadOnly={!isEdit}
-            ps={"0"}
-            value={newTableName}
-            onChange={(e) => {
-              setNewTableName(e.target.value);
-            }}
-          ></Input>
-          <Spacer />
-          {isEdit && (
-            <Button
-              colorScheme="teal"
-              size="xs"
-              me={"0.5rem"}
-              onClick={() => {
-                saveEdit();
-              }}
-            >
-              Save
-            </Button>
-          )}
-          {isEdit && (
-            <Button
-              colorScheme="red"
-              size="xs"
-              me={"1rem"}
-              onClick={() => {
-                setIsEdit(false);
-              }}
-            >
-              Cancel
-            </Button>
-          )}
+    function saveEdit(){
+        setIsEdit(false);
+        const newtable = {
+            tableName: newTableName,
+            primarykey: newPk,
+            foreignkey: newFk,
+            attributes: newAttributes,
+        };
+        let newalltable = JSON.parse(localStorage.getItem("alltable"));
+        newalltable = newalltable.map((table)=>{
+            if(table.tableName === tableName){
+                return newtable;
+            }
+            return table;
+        });
+        localStorage.setItem("alltable", JSON.stringify(newalltable));
+        trickEdit();
+        
 
-          <EditIcon
-            fontSize={"2xl"}
-            cursor={"pointer"}
-            me={"1rem"}
-            onClick={() => {
-              setIsEdit(true);
-            }}
-          />
-          <DeleteIcon
-            fontSize={"2xl"}
-            cursor={"pointer"}
-            onClick={() => {
-              del(tableName);
-            }}
-            display={isEdit ? "none" : ""}
-          />
-        </CardHeader>
+    }
+    return (
+        <>
+            <Card width={"100%"} >
+                <CardHeader display={"flex"} alignItems={"center"}>
+                    
+                    <Input type="text" border={"none"} size={"md"} 
+                    fontWeight={"bold"} fontSize={"xl"} isReadOnly={!isEdit} ps={"0"}
+                    value={newTableName} onChange={(e)=>{setNewTableName(e.target.value)} }
+                     ></Input>
+                    <Spacer/>
+                    { isEdit && 
+                        <Button colorScheme='teal' size='xs' me={"0.5rem"} onClick={()=>{saveEdit()}}>
+                            Save
+                        </Button>
+
+                    }
+                    {
+                        isEdit &&
+                        <Button colorScheme='red' size='xs' me={"1rem"} onClick={()=>{setIsEdit(false)}}>
+                            Cancel
+                        </Button>
+                    }
+        
+                    <EditIcon fontSize={"2xl"} cursor={"pointer"} me={"1rem"} onClick={()=>{setIsEdit(true)}}/>
+                    <DeleteIcon fontSize={"2xl"} cursor={"pointer"} onClick={()=>{del(id)}} display={isEdit? "none" : ""} />
+                    
+                </CardHeader>
 
         <CardBody>
           <Stack divider={<StackDivider />} spacing="4">
