@@ -120,7 +120,7 @@ export default function CreateTableData({clickcreate}) {
                                     Primary key
                                 </FormLabel>
                                 <Input 
-                                    placeholder="primary key"
+                                    placeholder="user_id(if not, enter - )"
                                     id="primarykey"
                                     onChange={(e)=> {
                                         setPrimarykey(e.target.value);
@@ -134,7 +134,7 @@ export default function CreateTableData({clickcreate}) {
                                     Foreign key
                                 </FormLabel>
                                 <AutoResizeTextArea 
-                                placeholder={"Example: product_id,order_id"
+                                placeholder={"Example: product_id,order_id (if not, enter - ))"
                                 }
                                 id={"foreignkey"}
                                 minH={"1rem"}
@@ -152,7 +152,7 @@ export default function CreateTableData({clickcreate}) {
                                     Attribute
                                 </FormLabel>
                                 <AutoResizeTextArea 
-                                placeholder={"Example: name,price,quantity"
+                                placeholder={"Example: name,age,phone"
                                 }
                                 id={"foreignkey"} 
                                 minH={"15rem"}
