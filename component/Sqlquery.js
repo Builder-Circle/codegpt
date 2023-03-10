@@ -26,6 +26,7 @@ export default function Sqlquery({sql="",createtable,clear}) {
                         <Button onClick={()=>{clear()}} >clear</Button>
                 </CardFooter>
             </Card>
+            
         </>
     );
 }
