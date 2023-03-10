@@ -66,13 +66,13 @@ export default function SqlQuery() {
 
     }
     function deleteTable(obj){
-            let tmp = [...alltable];
-            let index = tmp.indexOf(obj);
-            tmp.splice(index,1);
-            localStorage.setItem("alltable",JSON.stringify(tmp));
-            setAlltable(tmp);
-            
-
+        let tmp = [...alltable];
+        console.log(tmp);
+        console.log(obj);
+        console.log(tmp[0]);
+        let index = tmp.findIndex((item)=>(item.tableName === obj.tableName&&item.primarykey === obj.primarykey
+            &&item.foreignkey === obj.foreignkey&&item.attributes === obj.attributes));
+        console.log(index);
     }
 
     return (

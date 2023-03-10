@@ -42,8 +42,6 @@ export default function Datatable({tableName="Customer",pk="customer_id",fk="ord
         });
         localStorage.setItem("alltable", JSON.stringify(newalltable));
         trickEdit();
-        
-
     }
     return (
         <>
