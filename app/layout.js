@@ -2,7 +2,7 @@
 import Navbar from "@/component/Navbar";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Script } from "";
+import Script from "next/script";
 
 export default function RootLayout({ children }) {
   return (
