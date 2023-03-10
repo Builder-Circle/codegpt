@@ -120,7 +120,7 @@ export default function CreateTableData({clickcreate}) {
                                     Primary key
                                 </FormLabel>
                                 <Input 
-                                    placeholder="user_id(if not, enter - )"
+                                    placeholder="user_id"
                                     id="primarykey"
                                     onChange={(e)=> {
                                         setPrimarykey(e.target.value);
