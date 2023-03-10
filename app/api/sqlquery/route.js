@@ -11,7 +11,7 @@ export async function POST(request) {
             model: "gpt-3.5-turbo",
             messages: [
                 {"role": "system", "content": "You are best programmer that ever exist in the world!"},
-                {"role": "user", "content": `What's the MySQL command for ${dataRequire} which in following data ${database}`}
+                {"role": "user", "content": `So I have the database that\n${database}\nWhat's the MySQL command for the following question '${dataRequire}'`}
             ],
             temperature: 0,
         });
