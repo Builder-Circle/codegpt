@@ -117,7 +117,7 @@ export default function SqlQuery() {
                 <Box width={"60%"} display={"flex"} flexDirection={"column"} gap={"1rem"} >
                     {
                         alltable.map((table,index)=>{
-                            return <Datatable key={index} tableName={table.tableName} 
+                            return <Datatable key={index} tableName={table.tableName} pk={table.pk} fk={table.fk} attributes={table.attributes}
                             del={(tablename)=>{deleteTable(tablename)}} trickEdit={()=>{setEditTricker(!editTricker)}} />
                         }
                         )
