@@ -18,7 +18,7 @@ import { Button } from "@chakra-ui/react";
 import React from "react";
 import { Input } from "@chakra-ui/react";
 
-export default function Datatable({tableName="Customer",pk="customer_id",fk="order_id",attributes="category,price,quantity",del,trickEdit,id}) {
+export default function Datatable({tableName="Customer",pk="customer_id",fk="order_id",attributes="category,price,quantity",del,trickEdit}) {
     const [isEdit,setIsEdit] = React.useState(false);
     const [newTableName,setNewTableName] = React.useState(tableName);
     const [newPk,setNewPk] = React.useState(pk);
@@ -69,7 +69,15 @@ export default function Datatable({tableName="Customer",pk="customer_id",fk="ord
                     }
         
                     <EditIcon fontSize={"2xl"} cursor={"pointer"} me={"1rem"} onClick={()=>{setIsEdit(true)}}/>
-                    <DeleteIcon fontSize={"2xl"} cursor={"pointer"} onClick={()=>{del(id)}} display={isEdit? "none" : ""} />
+                    <DeleteIcon fontSize={"2xl"} cursor={"pointer"} onClick={()=>{
+                        const obj = {
+                            tableName: newTableName,
+                            primarykey: newPk,
+                            foreignkey: newFk,
+                            attributes: newAttributes,
+                        };
+                        del(obj)
+                        }} display={isEdit? "none" : ""} />
                     
                 </CardHeader>
 
