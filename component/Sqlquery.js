@@ -3,16 +3,17 @@ import { Center } from '@chakra-ui/react'
 import CopyButton from '@/component/CopyButton'
 import CreateTableData from '@/component/CreateTableData'
 import { Button } from '@chakra-ui/react'
-import { useState } from 'react'
+import { Box } from '@chakra-ui/react'
 export default function Sqlquery({sql="",createtable,clear}) {
     
     return (
         <>
             <Card width={"80%"} boxShadow={"base"} >
                 <CardHeader  >
-                    <Text fontSize={"3xl"}  >
+                    <Box fontSize={"3xl"} >
                         <Center>SQL Query</Center>
-                    </Text>
+                    </Box>
+                    
                 </CardHeader>
                 <CardBody>
                     <Text>

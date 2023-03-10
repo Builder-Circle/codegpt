@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
         <meta name='author' content='CodeGPT' />
         <meta name='keywords' content='CodeGPT' />
         <meta name='theme-color' content='#000000' />
-        <link rel='icon' href='/favicon.ico' />
+        
         <title>CodeGPT</title>
       </head>
       <body>
