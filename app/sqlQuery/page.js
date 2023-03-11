@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { Center } from "@chakra-ui/react";
-import axios from "axios";
+import axios, { all } from "axios";
 export default function SqlQuery() {
     const submit_q = useRef(null);
     const [alltable, setAlltable] = useState([]);
@@ -48,6 +48,7 @@ export default function SqlQuery() {
         }
         setAlltable(JSON.parse(localStorage.getItem("alltable")));
     }, [editTricker]);
+   
 
     
     function clicksubmit(){
@@ -65,19 +66,23 @@ export default function SqlQuery() {
             });
 
     }
+
     function deleteTable(obj){
         let tmp = [...alltable];
-        console.log(tmp);
-        console.log(obj);
-        console.log(tmp[0]);
+        // console.log(tmp);
+        // console.log(obj);
+        // console.log(tmp[0]);
         let index = tmp.findIndex((item)=>(item.tableName === obj.tableName&&item.primarykey === obj.primarykey
             &&item.foreignkey === obj.foreignkey&&item.attributes === obj.attributes));
-        console.log(index);
+        // console.log(index);
         tmp.splice(index,1);
-        console.log(tmp);
+        // console.log(tmp);
         localStorage.setItem("alltable",JSON.stringify(tmp));
         setAlltable(tmp);
-        setEditTricker(!editTricker);
+
+
+
+        
     }
 
     return (
@@ -124,12 +129,18 @@ export default function SqlQuery() {
                 </FormControl>
                 <Box width={"60%"} display={"flex"} flexDirection={"column"} gap={"1rem"} >
                     {
+                        JSON.stringify(alltable)
+                    }
+                    
+                    {
                         alltable.map((table,index)=>{
-                            
-                            return <Datatable key={index} tableName={table.tableName} pk={table.primarykey} fk={table.foreignkey} attributes={table.attributes} 
+                            return (
+                            <Datatable key={index} table={table}
                             del={(obj)=>{deleteTable(obj)}} trickEdit={()=>{setEditTricker(!editTricker)}} />
-                        }
+                            )}
                         )
+
+
                     }
 
                 </Box>

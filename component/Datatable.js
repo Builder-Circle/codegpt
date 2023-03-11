@@ -18,13 +18,13 @@ import { Button } from "@chakra-ui/react";
 import React from "react";
 import { Input } from "@chakra-ui/react";
 
-export default function Datatable({tableName="Customer",pk="customer_id",fk="order_id",attributes="category,price,quantity",del,trickEdit}) {
-    const [isEdit,setIsEdit] = React.useState(false);
-    const [newTableName,setNewTableName] = React.useState(tableName);
-    const [newPk,setNewPk] = React.useState(pk);
-    const [newFk,setNewFk] = React.useState(fk);
-    const [newAttributes,setNewAttributes] = React.useState(attributes);
 
+export default function Datatable({table,del,trickEdit}) {
+    const [isEdit,setIsEdit] = React.useState(false);
+    const [newTableName,setNewTableName] = React.useState(table.tableName);
+    const [newPk,setNewPk] = React.useState(table.primarykey);
+    const [newFk,setNewFk] = React.useState(table.foreignkey);
+    const [newAttributes,setNewAttributes] = React.useState(table.attributes);  
     function saveEdit(){
         setIsEdit(false);
         const newtable = {
@@ -46,11 +46,12 @@ export default function Datatable({tableName="Customer",pk="customer_id",fk="ord
     return (
         <>
             <Card width={"100%"} >
+                
                 <CardHeader display={"flex"} alignItems={"center"}>
-                    
+                    <div>{JSON.stringify(table)}</div>
                     <Input type="text" border={"none"} size={"md"} 
                     fontWeight={"bold"} fontSize={"xl"} isReadOnly={!isEdit} ps={"0"}
-                    value={newTableName} onChange={(e)=>{setNewTableName(e.target.value)} }
+                    value={table.tableName=== newTableName } onChange={(e)=>{setNewTableName(e.target.value)} }
                      ></Input>
                     <Spacer/>
                     { isEdit && 
