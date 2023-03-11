@@ -113,7 +113,7 @@ export default function SqlQuery() {
           </FormLabel>
 
           <AutoResizeTextArea
-            placeholder={" what is you question?"}
+            placeholder={" what is your question?"}
             id={"dataRequire"}
             minH={"1rem"}
             overflow={"hidden"}
