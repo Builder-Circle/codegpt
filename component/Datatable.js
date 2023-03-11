@@ -33,14 +33,22 @@ export default function Datatable({ table, del, trickEdit }) {
             attributes: newAttributes,
         };
         let newalltable = JSON.parse(localStorage.getItem("alltable"));
-        newalltable = newalltable.map((table) => {
-            if (table.tableName === tableName) {
+        newalltable = newalltable.map((item) => {
+            if (item.tableName === table.tableName&&item.primarykey===table.primarykey) {
                 return newtable;
+            } else {
+                return item;
             }
-            return table;
         });
         localStorage.setItem("alltable", JSON.stringify(newalltable));
         trickEdit();
+    }
+    function CancelEdit() {
+        setNewAttributes(table.attributes);
+        setNewFk(table.foreignkey);
+        setNewPk(table.primarykey);
+        setNewTableName(table.tableName);
+        setIsEdit(false);
     }
     return (
         <>
@@ -80,7 +88,7 @@ export default function Datatable({ table, del, trickEdit }) {
                             size="xs"
                             me={"1rem"}
                             onClick={() => {
-                                setIsEdit(false);
+                                CancelEdit();
                             }}
                         >
                             Cancel
