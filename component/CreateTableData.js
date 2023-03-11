@@ -13,7 +13,7 @@ import { AddIcon } from "@chakra-ui/icons";
 import { Box, FormLabel, Input, Stack } from "@chakra-ui/react";
 import React from "react";
 import AutoResizeTextArea from "./AutoResizeTextArea";
-import { useEffect,useState } from "react";
+import { useEffect,useState,useCallback } from "react";
 export default function CreateTableData({clickcreate}) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [tableName, setTableName] = useState("");
@@ -21,15 +21,27 @@ export default function CreateTableData({clickcreate}) {
     const [foreignkey, setForeignkey] = useState("");
     const [attributes, setAttributes] = useState("");
     const [ablecreate, setAblecreate] = React.useState(false);
-    
-    
+    const checkAblecreate = useCallback(() => {
+      if (
+        tableName !== "" &&
+        primarykey !== "" &&
+        foreignkey !== "" &&
+        attributes !== ""
+      ) {
+        setAblecreate(true);
+      } else {
+        setAblecreate(false);
+      }
+    }, [tableName, primarykey, foreignkey, attributes]);
+
    
     useEffect(() => {
         checkAblecreate();
+        
 
-    }, [tableName, primarykey, foreignkey, attributes]);
+    }, [tableName, primarykey, foreignkey, attributes,checkAblecreate]);
 
-
+    
   useEffect(() => {
     setTableName("");
     setPrimarykey("");
@@ -56,19 +68,9 @@ export default function CreateTableData({clickcreate}) {
 
         onClose();
     }
+    
 
-  function checkAblecreate() {
-    if (
-      tableName !== "" &&
-      primarykey !== "" &&
-      foreignkey !== "" &&
-      attributes !== ""
-    ) {
-      setAblecreate(true);
-    } else {
-      setAblecreate(false);
-    }
-  }
+  
   return (
     <>
       <Button leftIcon={<AddIcon />} colorScheme="teal" onClick={onOpen}>

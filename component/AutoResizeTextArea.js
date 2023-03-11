@@ -4,10 +4,13 @@ import { useEffect, useRef } from "react";
 import { Textarea } from "@chakra-ui/react";
 export default function AutoResizeTextArea(props) {
     const ref = useRef();
+
     useEffect(() => {
         autosize(ref.current);
+        const el = ref.current;
+
         return () => {
-            autosize.destroy(ref.current);
+            autosize.destroy(el);
         };
     }, []);
     return (<>
