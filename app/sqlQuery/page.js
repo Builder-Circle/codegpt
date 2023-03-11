@@ -10,6 +10,7 @@ import { Input } from "@chakra-ui/react";
 import AutoResizeTextArea from "@/component/AutoResizeTextArea";
 import Datatable from "@/component/Datatable";
 import { CircularProgress } from "@chakra-ui/react";
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   FormControl,
@@ -82,9 +83,9 @@ export default function SqlQuery() {
     setAlltable(tmp);
   }
 
-  useEffect(() => {
-    console.log(alltable);
-  }, [alltable]);
+//   useEffect(() => {
+//     console.log(alltable);
+//   }, [alltable]);
 
   return (
     <>
@@ -147,12 +148,12 @@ export default function SqlQuery() {
           flexDirection={"column"}
           gap={"1rem"}
         >
-          {JSON.stringify(alltable)}
+          {/* {JSON.stringify(alltable)} */}
 
           {alltable.map((table, index) => {
             return (
               <Datatable
-                key={table.tableName + index.toString()}
+                key={uuidv4()}
                 table={table}
                 del={(obj) => {
                   deleteTable(obj);

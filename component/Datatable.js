@@ -48,7 +48,7 @@ export default function Datatable({table,del,trickEdit}) {
             <Card width={"100%"} >
                 
                 <CardHeader display={"flex"} alignItems={"center"}>
-                    <div>{JSON.stringify(table)}</div>
+                    {/* <div>{JSON.stringify(table)}</div> */}
                     <Input type="text" border={"none"} size={"md"} 
                     fontWeight={"bold"} fontSize={"xl"} isReadOnly={!isEdit} ps={"0"}
                     value={table.tableName=== newTableName } onChange={(e)=>{setNewTableName(e.target.value)} }
