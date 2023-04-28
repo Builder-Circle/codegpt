@@ -95,6 +95,7 @@ export default function CreateTableData({clickcreate}) {
                     setTableName(e.target.value);
                   }}
                   value={tableName}
+                  autoComplete="off"
                 />
               </Box>
 
